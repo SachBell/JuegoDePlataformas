@@ -12,7 +12,7 @@ WHITE = (255, 255, 255)
 screen_width = 800
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Mi Juego Pygame")
+pygame.display.set_caption("Juego De Pltaformas")
 
 # Definir jugador
 player_width = 50

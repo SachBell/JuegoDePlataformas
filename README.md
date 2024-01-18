@@ -18,3 +18,11 @@ Instalar la libreria **Pygame**
 ```bash
   pip install pygame
 ```
+
+## Instalación
+
+Instalar la libreria **Pygame**
+
+```bash
+  pip install pygame
+```
