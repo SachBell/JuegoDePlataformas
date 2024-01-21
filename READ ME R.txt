@@ -1,0 +1,9 @@
+__________________________________
+Nota:
+----------------------------------
+Project y Configuración son los main files, debería
+cambiar el nombre de "Project" a "Main"
+
+Test1 es el ejemplo de la animación en movimiento
+
+*Fin de la nota*
