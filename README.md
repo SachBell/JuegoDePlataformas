@@ -1,6 +1,7 @@
 
 # Juego de Plataformas
 
+<<<<<<< HEAD
 Proyecto de Programacón Orientada A Objetos - Juego de Plataformas 
 
 # Índice
@@ -9,6 +10,9 @@ Proyecto de Programacón Orientada A Objetos - Juego de Plataformas
 - [Comandos para Git y Como Usarlos](https://github.com/SachBell/JuegoDePlataformas#Comandos-para-Git-y-Como-Usarlos)
 - [Comandos Básicos](https://github.com/SachBell/JuegoDePlataformas#Comandos-Básicos)
 - [Autores y Equipo de Desarrollo](https://github.com/SachBell/JuegoDePlataformas#Autores-y-Equipo-de-Desarrollo)
+=======
+Pryecto de Programacón Orientada A Objetos - Juego de Plataformas 
+>>>>>>> f40687d0aaa799679299dfa71d37804403f56eda
 
 ## Indicaciones Generales
 
@@ -16,6 +20,7 @@ Para poder usar el programa, deben descargar la librería pygame de python.
 
 Esto lo hacen con el comando:
 
+<<<<<<< HEAD
 Instalar la libreria **Pygame**
 ```bash
     pip install pygame
@@ -73,3 +78,14 @@ Traemos los **archivos** desde el repositorio a nuestra máquina
 - [@RPG450](https://www.github.com/RPG450)
 - [@jenyfe](https://www.github.com/jenyfe)
 - [@chrisg04](https://www.github.com/chrisg04)
+=======
+
+
+## Instalación
+
+Instalar la libreria **Pygame**
+
+```bash
+  pip install pygame
+```
+>>>>>>> f40687d0aaa799679299dfa71d37804403f56eda
