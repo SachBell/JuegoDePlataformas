@@ -5,8 +5,11 @@ from Configuración import *
 from Importaciones import *
 
 # Definir colores
+
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+imagen = pygame.image.load('Imagen.png')
+imagen2 = pygame.image.load('Imagen2.png')
 
 class Game():
 
