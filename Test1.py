@@ -10,8 +10,8 @@ screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Imagen en Movimiento")
 
 # Cargar las imágenes
-imagen = pygame.image.load('Imagen.png')
-imagen2 = pygame.image.load('Imagen2.png')
+imagen = pygame.image.load('./PROYECTOS/Juegodeplataformas/src/img/Imagen.png')
+imagen2 = pygame.image.load('./PROYECTOS/Juegodeplataformas/src/img/Imagen2.png')
 
 # Obtener los rectángulos asociados a las imágenes
 imagen_rect = imagen.get_rect()

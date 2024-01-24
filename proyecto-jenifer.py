@@ -12,11 +12,12 @@ white = (255, 255, 255)
 
 
 muñeco_color = (0, 128, 255)
-muñeco_pos = [width // 2, height // 2]  
-muñeco_speed = 5
+muñeco_speed = 20
 jumping = False
 jump_count = 10
 
+imagen = pygame.image.load('./PROYECTOS/Juegodeplataformas/src/img/Imagen.png')
+imagen_rect = imagen.get_rect()
 
 clock = pygame.time.Clock()
 
@@ -30,16 +31,16 @@ while True:
 
     
     if keys[pygame.K_LEFT]:
-        muñeco_pos[0] -= muñeco_speed
+        imagen_rect[0] -= muñeco_speed
     if keys[pygame.K_RIGHT]:
-        muñeco_pos[0] += muñeco_speed
+        imagen_rect[0] += muñeco_speed
 
     
     if not jumping:
         if keys[pygame.K_UP]:
-            muñeco_pos[1] -= muñeco_speed
+            imagen_rect[1] -= muñeco_speed
         if keys[pygame.K_DOWN]:
-            muñeco_pos[1] += muñeco_speed
+            imagen_rect[1] += muñeco_speed
         if keys[pygame.K_SPACE]:
             jumping = True
     else:
@@ -47,7 +48,7 @@ while True:
             neg = 1
             if jump_count < 0:
                 neg = -1
-            muñeco_pos[1] -= (jump_count ** 2) * 0.5 * neg
+            imagen_rect[1] -= (jump_count ** 2) * 0.5 * neg
             jump_count -= 1
         else:
             jumping = False
@@ -56,15 +57,8 @@ while True:
 
     screen.fill(white)
 
-    
-    pygame.draw.circle(screen, muñeco_color, muñeco_pos, 20)  # Cabeza
-    pygame.draw.line(screen, muñeco_color, muñeco_pos, (muñeco_pos[0], muñeco_pos[1] + 50), 5)  # Cuerpo
-    pygame.draw.line(screen, muñeco_color, (muñeco_pos[0], muñeco_pos[1] + 50), (muñeco_pos[0] - 20, muñeco_pos[1] + 100), 5)  # Pierna izquierda
-    pygame.draw.line(screen, muñeco_color, (muñeco_pos[0], muñeco_pos[1] + 50), (muñeco_pos[0] + 20, muñeco_pos[1] + 100), 5)  # Pierna derecha
-    pygame.draw.line(screen, muñeco_color, (muñeco_pos[0], muñeco_pos[1] + 20), (muñeco_pos[0] - 20, muñeco_pos[1] + 35), 5)  # Brazo izquierdo
-    pygame.draw.line(screen, muñeco_color, (muñeco_pos[0], muñeco_pos[1] + 20), (muñeco_pos[0] + 20, muñeco_pos[1] + 35), 5)  # Brazo derecho
+    screen.blit(imagen, imagen_rect)
 
-    
     pygame.display.flip()
 
     clock.tick(30)

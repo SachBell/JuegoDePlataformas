@@ -1,41 +1,59 @@
-#La importación pygame ahora será conocida como "pg"
-import pygame as pygame
+import pygame
 import sys
-from Configuración import *
-from Importaciones import *
+from src.mainGame import Personaje
+from src.objets.box import Caja
 
-# Definir colores
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
+pygame.init()
 
-class Game():
+width, height = 800, 600
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("JUEGO 1")
 
-    def __init__(self) -> None:
-        pygame.init()
-        self.screen = pygame.display.set_mode(Resolucion)
-        self.clock = pygame.time.Clock()
+white = (255, 255, 255)
 
-    def draw(self):
-        self.screen.fill('black')
-        imagen_rect = imagenchiquita.get_rect()
-        self.screen.blit(imagenchiquita, imagen_rect)
+personaje = Personaje(200, 200)
+caja = Caja(150, 200, 200, 500)   # Define las coordenadas y dimensiones de la caja
 
-    def update(self):
-        pygame.display.flip()
-        self.clock.tick(FPS)
-        pygame.display.set_caption(f"{self.clock.get_fps() :.2f}")
+clock = pygame.time.Clock()
 
-    def check_events(self):
-        for evento in pygame.event.get():
-            if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE):
-                pygame.quit()
-                sys.exit()
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
 
-    def run(self):
-        while True:
-            self.draw()
-            self.update()
-            self.check_events()
+    keys = pygame.key.get_pressed()
+    
+    personaje.move(keys, width, height, caja)
 
-main = Game()
-main.run()
+    screen.fill(white)
+
+    caja.dibujar(screen)
+
+    screen.blit(personaje.image, personaje.rect)
+
+    pygame.display.flip()
+
+    clock.tick(30)
+
+    while True:
+        # Verificar si el personaje ha caído fuera de la pantalla
+        if personaje.rect.y > height:
+            font = pygame.font.Font(None, 74)
+            game_over_text = font.render("Game Over", True, (255, 0, 0))
+            restart_text = font.render("Press R to restart", True, (255, 0, 0))
+            screen.blit(game_over_text, (width // 2 - 150, height // 2 - 50))
+            screen.blit(restart_text, (width // 2 - 250, height // 2 + 50))
+
+            pygame.display.flip()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_r:
+                        personaje.rect.x = 0  # Ajusta las coordenadas iniciales según tu diseño
+                        personaje.rect.y = 0
+                        personaje.jumping = False
+                        personaje.jump_count = 10
