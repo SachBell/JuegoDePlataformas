@@ -63,6 +63,50 @@ def abrir_ventana(titulo):
         pygame.display.flip()
         reloj.tick(60)
 
+# Función para la pantalla de carga
+# Función para la pantalla de carga
+def pantalla_carga():
+    # Configuración de la barra de carga
+    barra_carga_ancho = 600
+    barra_carga_alto = 50
+    barra_carga_color_lleno = (50, 150, 50)
+    barra_carga_color_vacio = (150, 150, 150)
+    barra_carga_x = (ancho_pantalla - barra_carga_ancho) // 2.3
+    barra_carga_y = (alto_pantalla - barra_carga_alto) // 2.3  
+    
+    
+
+
+    
+    # Simulando una carga de 2 segundos
+    tiempo_carga = 2000
+    tiempo_inicial = pygame.time.get_ticks()
+
+    
+
+    while pygame.time.get_ticks() - tiempo_inicial < tiempo_carga:
+        progreso = (pygame.time.get_ticks() - tiempo_inicial) / tiempo_carga
+        pygame.draw.rect(ventana_principal, barra_carga_color_lleno, (barra_carga_x, barra_carga_y, int(barra_carga_ancho * progreso), barra_carga_alto))
+        pygame.draw.rect(ventana_principal, barra_carga_color_vacio, (barra_carga_x + int(barra_carga_ancho * progreso), barra_carga_y, int(barra_carga_ancho * (1 - progreso)), barra_carga_alto))
+        pygame.display.update()
+
+    # Puedes agregar aquí la carga de otros recursos como imágenes, sonidos, etc.
+
+    # Aquí puedes cargar todos los recursos necesarios
+    # Mientras se cargan, puedes mostrar una pantalla de carga
+    # Puedes mostrar un mensaje o una animación de carga
+
+    # Simulando una carga con un simple mensaje
+    font = pygame.font.Font(None, 46)
+    texto_carga = font.render("Cargando...", True, blanco)
+    ventana_principal.blit(texto_carga, ((ancho_pantalla - texto_carga.get_width()) // 2.3, (alto_pantalla - texto_carga.get_height()) // 2.3))
+    pygame.display.flip()
+
+    # Puedes agregar aquí la carga de otros recursos como imágenes, sonidos, etc.
+    pygame.time.wait(2000)  # Simulando una carga de 2 segundos
+
+# Llamar a la pantalla de carga antes de entrar al bucle principal
+pantalla_carga()
 
 # Loop principal
 while True:
@@ -109,6 +153,7 @@ while True:
 
     pygame.display.flip()
     reloj.tick(60)
+
 
 
 
