@@ -1,9 +1,9 @@
 import pygame
+from src.importMethod import *
 
 class Personaje:
     def __init__(self, x, y, speed=20):
-        self.image = pygame.image.load('./PROYECTOS/Juegodeplataformas/src/img/Imagen.png')
-        self.rect = self.image.get_rect()
+        self.rect = Character.get_rect()
         self.rect.x = x
         self.rect.y = y
         self.speed = speed

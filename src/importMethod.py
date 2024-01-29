@@ -1,4 +1,13 @@
 import pygame
+from Configuración import *
 
-imagen = pygame.image.load('./PROYECTOS/Juegodeplataformas/src/img/Imagen.png')
-imagenchiquita = pygame.transform.scale(imagen, (60, 100))
+imagen_fondo_principal = pygame.image.load("./Data/Texturas/Fondos/FondoMenu1.jpg")
+imagen_fondo_principal = pygame.transform.scale(imagen_fondo_principal, (Ancho_Pantalla, Alto_Pantalla))
+imagen_fondo_nueva = pygame.image.load("./Data/Texturas/Fondos/FondoMenu2.png")
+imagen_fondo_nueva = pygame.transform.scale(imagen_fondo_nueva, (Ancho_Pantalla, Alto_Pantalla))
+
+Ventana_Principal = pygame.display.set_mode((Ancho_Pantalla, Alto_Pantalla), pygame.FULLSCREEN)
+pygame.display.set_caption("Ventana Principal")
+
+Character = pygame.image.load('./Data/Sprites/Stickman/Stickman_Idle.png')
+imagenchiquita = pygame.transform.scale(Character, (60, 100))

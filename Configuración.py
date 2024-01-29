@@ -1,3 +1,6 @@
 #Configuración
+import pygame
 
-Resolucion = Ancho, Alto = (900, 800)
+blanco = (255, 255, 255)
+reloj = pygame.time.Clock()
+Resolucion = Ancho_Pantalla, Alto_Pantalla = (1700, 850)
