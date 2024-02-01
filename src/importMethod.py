@@ -9,5 +9,5 @@ imagen_fondo_nueva = pygame.transform.scale(imagen_fondo_nueva, (Ancho_Pantalla,
 Ventana_Principal = pygame.display.set_mode((Ancho_Pantalla, Alto_Pantalla), pygame.FULLSCREEN)
 pygame.display.set_caption("Ventana Principal")
 
-Character = pygame.image.load('./Data/Sprites/Stickman/Stickman_Idle.png')
-imagenchiquita = pygame.transform.scale(Character, (60, 100))
+
+# imagenchiquita = pygame.transform.scale(Character, (60, 100))

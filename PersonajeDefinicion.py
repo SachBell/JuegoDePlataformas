@@ -3,7 +3,14 @@ from src.importMethod import *
 
 class Personaje:
     def __init__(self, x, y, speed=20):
-        self.rect = Character.get_rect()
+        self.Sprites_Idle = [pygame.image.load('./Data/Sprites/Stickman/Stickman_Idle.png')]
+        self.Sprites_Caminando_Derecha = [pygame.image.load('./Data/Sprites/Stickman/Stickman_Walk_Left_1.png'),
+                                          pygame.image.load('./Data/Sprites/Stickman/Stickman_Walk_Left_2.png')]
+        self.Sprites_Caminando_Izquierda = []
+        self.Current_Sprites = self.Sprites_Idle
+        self.Sprite_Index = 0
+        self.image = self.Current_Sprites[self.Sprite_Index]
+        self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
         self.speed = speed
