@@ -23,7 +23,8 @@ while True:
 
     Ventana_Principal.blit(imagen_fondo_principal, (0, 0))
 
-    # Agregar un título centrado en la parte superior de la ventana principal
+    # Agregar un título centra
+    # do en la parte superior de la ventana principal
     fuente_titulo = pygame.font.Font(None, 80)
     titulo_texto = fuente_titulo.render("¡HUMAN JUMP!", True, blanco)
     Ventana_Principal.blit(titulo_texto, ((ancho_pantalla - titulo_texto.get_width()) // 2.3, alto_pantalla * 0.10))#desplaza hacia abajo el titutlo

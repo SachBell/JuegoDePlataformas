@@ -1,12 +1,22 @@
 #Menu
 from Configuración import *
-from src.importMethod import *
+from Importaciones import *
 import sys
+import random
+
+class Menus:
+    
+    def __init__(self) -> None:
+        pass
+
+    def Ventana_Inicio(self): pass
+
 
 def abrir_ventana(titulo):
 
     ventana_nueva = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     pygame.display.set_caption(titulo)
+
 
     # Cargar la imagen de fondo y redimensionar
     imagen_fondo_nueva = pygame.transform.scale(imagen_fondo_nueva, (Ancho_Pantalla, Alto_Pantalla))
@@ -53,7 +63,32 @@ def pantalla_carga():
     barra_carga_color_lleno = (50, 150, 50)
     barra_carga_color_vacio = (150, 150, 150)
     barra_carga_x = (Ancho_Pantalla - barra_carga_ancho) // 2.3
-    barra_carga_y = (Alto_Pantalla - barra_carga_alto) // 2.3  
+    barra_carga_y = (Alto_Pantalla - barra_carga_alto) // 2.3
+    
+    num_particulas = 30
+    particulas = [{'x': random.randint(0, Ancho_Pantalla),
+                   'y': random.randint(0, Alto_Pantalla),
+                   'dx': random.uniform(-2, 2),
+                   'dy': random.uniform(-2, 2),
+                   'radio': random.randint(5, 15),
+                   'color': celeste} for _ in range(num_particulas)]
+
+    while pygame.time.get_ticks() - tiempo_inicial < tiempo_carga:
+        Ventana_Principal.fill((0, 0, 0))  # Limpiar la pantalla
+
+        # Dibujar las partículas
+        for particula in particulas:
+            pygame.draw.circle(Ventana_Principal, particula['color'], (int(particula['x']), int(particula['y'])), particula['radio'])
+
+            # Actualizar posición de la partícula
+            particula['x'] += particula['dx']
+            particula['y'] += particula['dy']
+
+            # Rebotar en los bordes de la pantalla
+            if particula['x'] <= 0 or particula['x'] >= Ancho_Pantalla:
+                particula['dx'] *= -1
+            if particula['y'] <= 0 or particula['y'] >= Alto_Pantalla:
+                particula['dy'] *= -1  
   
     # Simulando una carga de 2 segundos
     tiempo_carga = 1000
@@ -79,6 +114,9 @@ def pantalla_carga():
     pygame.display.flip()
 
     # Puedes agregar aquí la carga de otros recursos como imágenes, sonidos, etc.
-    pygame.time.wait(200)  # Simulando una carga de 2 segundos
+    
+
+    
+    
 
 
