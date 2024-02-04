@@ -19,19 +19,17 @@ class Personaje:
         self.Current_Sprites = self.Sprites_Idle
         self.Sprite_Index = 0
         self.image = self.Current_Sprites[self.Sprite_Index]
-        self.rect = pygame.Rect(0,0,165,300)
-        self.rect.width = 165
-        self.rect.height = 384
+        self.rect = pygame.Rect(40, 40, 165, 384)
         self.InitialX = x
         self.InitialY = y
         self.LastX = self.InitialX
         self.LastY = self.InitialY
         self.rect.x = x
         self.rect.y = y
-        self.speed = 20
+        self.speed = 5
         self.Jumping = False
         self.jump_count = 10
-        self.gravity = 0
+        self.gravity = 3
         self.OnGround = True
         self.IdleWait = 0
         self.framecount = 0
@@ -49,10 +47,6 @@ class Personaje:
             self.rect.y -= self.speed/2
         if keys[pygame.K_DOWN]:
             self.rect.y += self.speed/2
-
-        # Aplicar gravedad
-        if not self.Jumping and not self.OnGround:
-            self.rect.y += self.gravity
 
         # Lógica de salto
         if keys[pygame.K_SPACE] and not self.Jumping:
@@ -93,21 +87,20 @@ class Personaje:
         for Objeto_Actual in Objetos:          
             if self.rect.colliderect(Objeto_Actual.rect):
                 if Objeto_Actual.GetTipo() == "muro":
+
+                    if (self.rect.bottom - 10) < Objeto_Actual.rect.top : print(f"{self.rect.bottom} - {Objeto_Actual.rect.top} encima de")
+
                     self.rect.x = self.LastX
                     self.rect.y = self.LastY
+                    print("contacto")
 
-                    if Tiempo.FrameLimiter(50):
-                        
-                        print(f"izquierda {(self.rect.right - Objeto_Actual.rect.left)}")
-                        print(f"derecha {(self.rect.left - Objeto_Actual.rect.right)}")
-                        print(f"arriba {(self.rect.bottom - Objeto_Actual.rect.top)}")
-                        print(f"abajo {(self.rect.top - Objeto_Actual.rect.bottom)}")
-                    print(self.LastX)
-                    print(self.LastY)
             else:
                 self.OnGround = False
         self.LastX = self.rect.x
         self.LastY = self.rect.y
+    
+    def CheckGravity(self):
+        pass
 
     def AccionPersonaje(self):
         self.CheckIdle()
