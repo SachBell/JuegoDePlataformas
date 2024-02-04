@@ -9,7 +9,8 @@ class Personaje:
         self.speed = speed
         self.jumping = False
         self.jump_count = 10
-        self.gravity = 1
+        self.gravity = 50
+        self.on_ground = False
 
     def move(self, keys, screen_width, screen_height, caja):
         if keys[pygame.K_LEFT] and self.rect.x > 0:
@@ -18,20 +19,23 @@ class Personaje:
             self.rect.x += self.speed
 
         # Aplicar gravedad
-        if not self.jumping and self.rect.y < screen_height - self.rect.height:
+        if not self.jumping and not self.on_ground:
             self.rect.y += self.gravity
 
         # Verificar colisión con la caja
-        if self.rect.colliderect(caja.rect):
-            self.rect.y = caja.rect.y - self.rect.height
+        if self.rect.colliderect(caja.get_hitbox()):
+            self.on_ground = True
             self.jumping = False
             self.jump_count = 10
+            # Ajustar la posición del personaje al tocar la caja
+            if keys[pygame.K_SPACE]:
+                self.rect.y = caja.get_hitbox().y - self.rect.height
         else:
-            self.jumping = True if self.rect.y < screen_height - self.rect.height else False
+            self.on_ground = False
 
         # Lógica de salto
-        if keys[pygame.K_SPACE] and not self.jumping:
-            self.jump_count = 10
+        if keys[pygame.K_SPACE] and not self.jumping and self.on_ground:
+            self.jumping = True
 
         if self.jumping:
             if self.jump_count >= -10:
@@ -43,3 +47,11 @@ class Personaje:
             else:
                 self.jumping = False
                 self.jump_count = 10
+
+        # Restablecer la posición del personaje al salir de la vista
+        if self.rect.y > screen_height:
+            self.rect.y = 100
+            self.rect.x = 20
+            self.on_ground = False
+            self.jumping = False
+            self.jump_count = 10

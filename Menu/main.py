@@ -10,7 +10,7 @@ ventana_principal = pygame.display.set_mode((ancho_pantalla, alto_pantalla), pyg
 pygame.display.set_caption("Ventana Principal")
 
 # Cargar la imagen de fondo y redimensionar
-imagen_fondo_principal = pygame.image.load("stickman.jpg")
+imagen_fondo_principal = pygame.image.load("./PROYECTOS/JuegodePlataformas/Menu/stickman.jpg")
 imagen_fondo_principal = pygame.transform.scale(imagen_fondo_principal, (ancho_pantalla, alto_pantalla))
 
 # Crear un reloj para controlar la velocidad de la aplicación
@@ -25,7 +25,7 @@ def abrir_ventana(titulo):
     pygame.display.set_caption(titulo)
 
     # Cargar la imagen de fondo y redimensionar
-    imagen_fondo_nueva = pygame.image.load("stickman2.png")
+    imagen_fondo_nueva = pygame.image.load("./PROYECTOS/JuegodePlataformas/Menu/stickman2.png")
     imagen_fondo_nueva = pygame.transform.scale(imagen_fondo_nueva, (ancho_pantalla, alto_pantalla))
 
     # Crear una lista de nombres para las ventanas
