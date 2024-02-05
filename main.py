@@ -25,7 +25,7 @@ while Game:
     screen.blit(Imagen_Juego, (0,0))
     Tiempo.ComenzarTiempo()
     EstadoActual.CheckInput(Personaje_Principal)
-    Objeto.DibujarObjetos(screen)
+    Objeto.DibujarObjetos()
     Personaje_Principal.AccionPersonaje()
     pygame.display.flip()
     reloj.tick(60)
