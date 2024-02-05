@@ -1,6 +1,7 @@
 import pygame
 from Importaciones import *
 from Objetos import Objeto
+from Configuración import *
 
 class Personaje:
     def __init__(self, x, y):
@@ -27,19 +28,27 @@ class Personaje:
         self.rect.x = x
         self.rect.y = y
         self.speed = 5
+        self.JumpSpeed = 10
         self.Jumping = False
-        self.jump_count = 10
+        self.CheckAgain = True
+        self.IfCollide = False
+        self.IfCollide2 = False
+        self.Jump_Speed = 10
         self.gravity = 3
         self.OnGround = False
         self.IdleWait = 0
         self.framecount = 0
+        self.i = 0
 
-    def move(self, keys, screen_width, screen_height):
+    def CheckInput(self):
+
+        keys = pygame.key.get_pressed()
+
         if keys[pygame.K_LEFT] and self.rect.x > 0:
             self.IdleWait = 3
             self.ChangeSprites("left")
             self.rect.x -= self.speed
-        if keys[pygame.K_RIGHT] and self.rect.x < screen_width - self.rect.width:
+        if keys[pygame.K_RIGHT] and self.rect.x < Ancho_Pantalla - self.rect.width:
             self.IdleWait = 3
             self.ChangeSprites("right")
             self.rect.x += self.speed
@@ -51,17 +60,15 @@ class Personaje:
 
         # Lógica de salto
         if keys[pygame.K_SPACE] and not self.Jumping:
-            self.jump_count = 10
+            self.Jump_Speed = 10
+            self.Jumping = True
         if self.Jumping:
-            if self.jump_count >= -10:
-                neg = 1
-                if self.jump_count < 0:
-                    neg = -1
-                self.rect.y -= (self.jump_count ** 2) * 0.5 * neg
-                self.jump_count -= 1
-            else:
-                self.Jumping = False
-                self.jump_count = 10
+            if self.Jump_Speed >= 0:
+                for i in range(0,self.JumpSpeed):
+                    self.rect.y -= 1
+                self.Jump_Speed -=1
+                print("jump")
+            else: self.Jumping = False              
 
     def CheckIdle(self):
         if self.IdleWait == 0:
@@ -69,6 +76,7 @@ class Personaje:
             self.image = self.Current_Sprites[0]
         else: 
             self.IdleWait -=1
+            self.CheckAgain = True
         
     def ChangeSprites(self, side):
         if side == "left": self.Current_Sprites = self.Sprites_Caminando_Izquierda
@@ -90,29 +98,56 @@ class Personaje:
                 if Objeto_Actual.GetTipo() == "muro":
 
                     if (self.rect.bottom - 10) < Objeto_Actual.rect.top : 
-                        self.rect.y = self.LastY
+                        self.rect.y = (Objeto_Actual.rect.top - self.rect.height)+1
                         self.OnGround = True
                     else:
                         self.rect.x = self.LastX
                         self.rect.y = self.LastY
-                        self.OnGround = False
+                        
+                        self.HasCollided(True)
             else:
+                self.HasCollided(False)
                 self.OnGround = False
+
+    def HasCollided(self, check):
+        if self.i == 0:
+            self.IfCollide = check; self.i = 1
+        elif self.i == 1:
+            self.IfCollide2 = check; self.i = 0
         
+        if self.IfCollide != self.IfCollide2 or not self.IfCollide and not self.IfCollide2:
+            self.CheckAgain = True
+            self.OnGround = True
+
+    def IfOnGround(self, OnGround):
+        if OnGround: self.OnGround = True
+
+
     def CheckGravity(self):
-        if self.OnGround: print("tocando piso")
-        else: print("En el aire"); self.rect.y += self.gravity
-    
+        if self.CheckAgain:    
+            if self.OnGround: 
+                # print("tocando piso")
+                self.gravity = 3
+                self.CheckAgain = False
+            else: 
+                # print("En el aire")
+                self.rect.y += self.gravity
+            
+            
+    def ApplyGravity(self):
+        self.rect.y += self.gravity
+        
     def ActualizarUltimasCoordenadas(self):
         self.LastX = self.rect.x
         self.LastY = self.rect.y
 
     def AccionPersonaje(self):
         self.CheckIdle()
+        self.CheckInput()
         self.CheckCollide()
         self.CheckGravity()
         self.ActualizarUltimasCoordenadas()
-
+        # print(f"{self.CheckAgain}\r")
         Resize_Character = pygame.transform.scale(self.image, (self.rect.width, self.rect.height))
         screen.blit(Resize_Character, self.rect)
 

@@ -57,4 +57,4 @@ Tiempo = TimeControl()
 
 #Definición de la pantalla
 Resolucion = Ancho_Pantalla, Alto_Pantalla = (1280, 720)
-screen = pygame.display.set_mode((Resolucion), pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.RESIZABLE)
+screen = pygame.display.set_mode((Resolucion), pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.RESIZABLE | pygame.SRCALPHA)

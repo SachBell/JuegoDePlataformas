@@ -12,7 +12,7 @@ class Objeto():
         self.textura = textura
         self.tipo = tipo
         self.rect = pygame.Rect(x, y, width, height)
-        self.color = (0, 255, 0)  # Cambia el color a verde
+        self.color = (255, 255, 255, 128)  # Cambia el color a verde
         Objeto.ObjetosCreados.append(self)
     
     def GetTipo(self):
