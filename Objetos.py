@@ -7,8 +7,7 @@ class Objeto():
 
     ObjetosCreados = []
 
-    def __init__(self, x, y, width, height, tipo, textura, tipoimagen, Resize):
-        self.tipoimagen = tipoimagen
+    def __init__(self, x, y, width, height, tipo, textura, Resize):
         self.Resize = Resize
         self.textura = textura
         self.tipo = tipo

@@ -13,7 +13,7 @@ pygame.display.set_mode(Resolucion, pygame.SRCALPHA)
 pygame.display.set_caption("Stickman Jumping")
 EstadoActual = States()
 nivel = Niveles()
-nivel.Lvl_1()
+nivel.Lvl_3()
 
 Personaje_Principal = Personaje(1, 450)
 Game = True

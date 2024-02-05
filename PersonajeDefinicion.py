@@ -24,7 +24,7 @@ class Personaje:
         self.Current_Sprites = self.Sprites_Idle
         self.Sprite_Index = 0
         self.image = self.Current_Sprites[self.Sprite_Index]
-        self.rect = pygame.Rect(0, 0, 60, 140)
+        self.rect = pygame.Rect(0, 0, 45, 105)
         self.InitialX = x
         self.InitialY = y
         self.LastX = self.InitialX
@@ -127,7 +127,8 @@ class Personaje:
                         self.Ground = Objeto_Actual
                         self.HaveGround = True
                     elif (self.rect.top + 10) > Objeto_Actual.rect.bottom:
-                        self.rect.y = self.LastY
+                        self.rect.y = self.LastY+1
+                        self.StopJumping = True
                     else:
                         self.rect.x = self.LastX
                         
@@ -177,10 +178,10 @@ class Personaje:
                 self.AddedGravity = 0
                 self.gravity = 10
                 self.CheckAgain = False
-                if self.count > 0: pass
-                else:
-                    self.Jumping = False
-                    self.StopJumping = False
+                self.count = 0
+                self.Jumping = False
+                self.StopJumping = False
+                    
             else: 
                 # print("En el aire")
                 self.AplicarGravedad(self.gravity)
