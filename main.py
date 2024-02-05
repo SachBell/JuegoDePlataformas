@@ -15,7 +15,7 @@ EstadoActual = States()
 nivel = Niveles()
 nivel.Lvl_1()
 
-Personaje_Principal = Personaje(1, 500)
+Personaje_Principal = Personaje(1, 450)
 Game = True
 
 # Llamar a la pantalla de carga antes de entrar al bucle principal

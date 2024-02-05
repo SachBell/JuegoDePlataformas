@@ -39,7 +39,7 @@ class States:
         personaje.rect.x = x
         personaje.rect.y = y
         Tiempo.ModificarSegundos(0)
-        personaje.gravity = 3
+        personaje.gravity = 10
         
     
     
