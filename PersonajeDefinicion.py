@@ -40,7 +40,7 @@ class Personaje:
         self.HaveGround = False
         self.Jump_Speed = 10
         self.gravity = 10
-        self.AddedGravity = 2
+        self.AddedGravity = 0
         self.OnGround = False
         self.IdleWait = 0
         self.framecount = 0
@@ -80,7 +80,9 @@ class Personaje:
         elif self.Jumping and not self.StopJumping:
               
                     if self.count > 0 and self.Decrease > 0 and self.Jump_Speed > 0:
-                        self.rect.y -= (self.Jump_Speed - self.Decrease)
+                        for i in range(0, (self.Jump_Speed - self.Decrease)):
+                            self.rect.y -= 1
+                            self.CheckCollide()
                         self.count -= 1
                         self.Time+=1
                         if self.Time >= 3:
@@ -172,7 +174,8 @@ class Personaje:
         if self.CheckAgain:    
             if self.OnGround: 
                 print("Tocando piso 2")
-                
+                self.AddedGravity = 0
+                self.gravity = 10
                 self.CheckAgain = False
                 if self.count > 0: pass
                 else:
@@ -183,9 +186,14 @@ class Personaje:
                 self.AplicarGravedad(self.gravity)
     
     def AplicarGravedad(self, Gravedad):
+        print(self.AddedGravity)
         for i in range(0, Gravedad):
             self.rect.y += 1
             self.CheckCollide()
+        if self.AddedGravity >= 20:
+            self.gravity += 1
+               
+        self.AddedGravity += 1
             
         
         
