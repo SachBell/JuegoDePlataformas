@@ -32,17 +32,22 @@ class Personaje:
         self.rect.x = x
         self.rect.y = y
         self.speed = 5
-        self.JumpSpeed = 10
+        self.JumpSpeed = 3
         self.Jumping = False
         self.CheckAgain = True
         self.IfCollide = False
         self.IfCollide2 = False
-        self.Jump_Speed = 28
+        self.HaveGround = False
+        self.Jump_Speed = 6
         self.gravity = 3
         self.OnGround = False
         self.IdleWait = 0
         self.framecount = 0
         self.i = 0
+
+        self.Time = 15
+        self.Decrease = 2
+        self.StopJumping = False
 
     def CheckInput(self):
 
@@ -62,23 +67,34 @@ class Personaje:
         if keys[pygame.K_DOWN]:
             self.rect.y += self.speed/2
 
+
+        
         # Lógica de salto
         if keys[pygame.K_SPACE] and self.OnGround and not self.Jumping:
-            self.Time = 5
-            self.Decrease = 7
+            self.Time = 15
+            self.Decrease = 2
             self.Jumping = True
-        if self.Jumping:
-            if self.Jump_Speed > 0:
+        elif self.Jumping and not self.StopJumping:
+            while True:
                 for i in range(0,self.JumpSpeed):
-                    self.rect.y -= 1
-                if Tiempo.FrameLimiter(self.Time):
-                    self.Jump_Speed -= self.Decrease
-                    self.Time += 1
-                    self.Decrease -= 1
-                print(f"{self.Jump_Speed} {self.Time} {self.Decrease}") 
-            else: 
-                self.Jumping = False
-                self.Jump_Speed = 28
+                    if Timer3.FrameLimiter(1):
+                        self.rect.y -= 1
+                
+                if self.Jump_Speed > 0:       
+                    if Timer1.FrameLimiter(self.Time):
+                        print("si")
+                        self.Jump_Speed -= self.Decrease
+                        self.Time += 2
+                        if Timer2.FrameLimiter(3):
+                            if self.Decrease == 1: pass    
+                            else: self.Decrease -= 1 
+                else:
+                    self.StopJumping = True 
+                    break
+        
+        print(f"{self.Jump_Speed} {self.Time} {self.Decrease} {self.rect.x} {self.rect.y}")
+
+         
 
     def CheckIdle(self):
         if self.IdleWait == 0:
@@ -86,7 +102,6 @@ class Personaje:
             self.image = self.Current_Sprites[0]
         else: 
             self.IdleWait -=1
-            self.CheckAgain = True
         
     def ChangeSprites(self, side):
         if side == "left": self.Current_Sprites = self.Sprites_Caminando_Izquierda
@@ -108,21 +123,28 @@ class Personaje:
                 if Objeto_Actual.GetTipo() == "muro":
 
                     if (self.rect.bottom - 10) < Objeto_Actual.rect.top : 
-                        self.rect.y = (Objeto_Actual.rect.top - self.rect.height)+1
-                        self.IfOnGround()
-                    
+                        self.Ground = Objeto_Actual
+                        self.HaveGround = True
                     else:
                         self.rect.x = self.LastX
                         self.rect.y = self.LastY
-                        self.HasCollided(True)
-                        print("colision")
+                        
                 elif Objeto_Actual.GetTipo() == "trampa":
-                        print("auch")
-                        Estados.Muerte(self)    
-                                        
+
+                        Estados.Muerte(self)                 
             else:
-                print("No colision")
-                self.HasCollided(False)
+                # print("No colision")
+                pass
+    
+    def CheckCollideGround(self, Ground):
+        if self.rect.colliderect(Ground.rect):
+            self.rect.y = (Ground.rect.top - self.rect.height)+1
+            self.IfOnGround()
+            self.HasCollided(True)
+            # print("encima")
+        else:
+            self.HasCollided(False)
+
 
     def HasCollided(self, check):
         if self.i == 0:
@@ -133,9 +155,10 @@ class Personaje:
         if (self.IfCollide == False and self.IfCollide2 == False):
             self.CheckAgain = True
             self.OnGround = False
-            # print(self.IfCollide)
-            # print(self.IfCollide2)
-            print("condicion cumplida")
+            
+        #     print("condicion cumplida")
+        # print(self.IfCollide)
+        # print(self.IfCollide2)
 
     def IfOnGround(self):
         self.OnGround = True
@@ -148,12 +171,14 @@ class Personaje:
     def CheckGravity(self):
         if self.CheckAgain:    
             if self.OnGround: 
-                # print("tocando piso\r")
+                # print("Tocando piso 2")
                 self.gravity = 3
                 self.CheckAgain = False
                 self.Jumping = False
+                self.Jump_Speed = 3
+                self.StopJumping = False
             else: 
-                print("En el aire")
+                # print("En el aire")
                 self.rect.y += self.gravity
             
     def ApplyGravity(self):
@@ -168,6 +193,7 @@ class Personaje:
         self.CheckInput()
         self.CheckCollide()
         self.CheckGravity()
+        if self.HaveGround: self.CheckCollideGround(self.Ground)
         self.ActualizarUltimasCoordenadas()
         # print(f"{self.CheckAgain}\r")
         Resize_Character = pygame.transform.scale(self.image, (self.rect.width, self.rect.height))

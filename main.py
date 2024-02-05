@@ -8,7 +8,7 @@ from Estados import *
 from Menu import *
 
 pygame.init()
-pygame.display.set_mode()
+pygame.display.set_mode(Resolucion, pygame.SRCALPHA)
 pygame.display.set_caption("Stickman Jumping")
 EstadoActual = States()
 Suelo = Objeto(0, 700, 1500, 240, "muro", "grass", False)

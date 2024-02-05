@@ -54,6 +54,11 @@ class TimeControl:
 
 #Objeto para control del tiempo
 Tiempo = TimeControl()  
+Timer1 = TimeControl()
+Timer2 = TimeControl()
+Timer3 = TimeControl()
+Timer4 = TimeControl()
+Timer5 = TimeControl()
 
 #Definición de la pantalla
 Resolucion = Ancho_Pantalla, Alto_Pantalla = (1280, 720)
