@@ -6,16 +6,16 @@ from PersonajeDefinicion import Personaje
 from Objetos import *
 from Estados import *
 from Menu import *
+from Niveles import *
 
 pygame.init()
 pygame.display.set_mode(Resolucion, pygame.SRCALPHA)
 pygame.display.set_caption("Stickman Jumping")
 EstadoActual = States()
-Suelo = Objeto(0, 700, 1500, 240, "muro", "grass", False)
-Meta = Objeto(1000, 500, 100, 100, "", "arbol1", True)
-Pike = Objeto(800, 600, 40, 40, "trampa", "pincho", True)
+nivel = Niveles()
+nivel.Lvl_1()
 
-Personaje_Principal = Personaje(600, 500)
+Personaje_Principal = Personaje(1, 500)
 Game = True
 
 # Llamar a la pantalla de carga antes de entrar al bucle principal

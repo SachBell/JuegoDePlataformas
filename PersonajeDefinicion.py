@@ -38,14 +38,14 @@ class Personaje:
         self.IfCollide = False
         self.IfCollide2 = False
         self.HaveGround = False
-        self.Jump_Speed = 6
-        self.gravity = 3
+        self.Jump_Speed = 20
+        self.gravity = 4
         self.OnGround = False
         self.IdleWait = 0
         self.framecount = 0
         self.i = 0
 
-        self.Time = 15
+        self.Time = 2
         self.Decrease = 2
         self.StopJumping = False
 
@@ -71,26 +71,24 @@ class Personaje:
         
         # Lógica de salto
         if keys[pygame.K_SPACE] and self.OnGround and not self.Jumping:
-            self.Time = 15
+            self.Time = 2
             self.Decrease = 2
             self.Jumping = True
         elif self.Jumping and not self.StopJumping:
-            while True:
-                for i in range(0,self.JumpSpeed):
-                    if Timer3.FrameLimiter(1):
-                        self.rect.y -= 1
-                
-                if self.Jump_Speed > 0:       
-                    if Timer1.FrameLimiter(self.Time):
-                        print("si")
-                        self.Jump_Speed -= self.Decrease
-                        self.Time += 2
-                        if Timer2.FrameLimiter(3):
-                            if self.Decrease == 1: pass    
-                            else: self.Decrease -= 1 
-                else:
-                    self.StopJumping = True 
-                    break
+              
+                    self.rect.y -= self.Jump_Speed
+                    if self.Jump_Speed > 0:       
+                        if Timer1.FrameLimiter(self.Time):
+                            print("si")
+                            self.Jump_Speed -= self.Decrease
+                            
+                            if Timer2.FrameLimiter(3):
+                                self.Time += 2
+                                if self.Decrease == 1: pass    
+                                else: self.Decrease -= 1 
+                    else:
+                        self.StopJumping = True 
+                        
         
         print(f"{self.Jump_Speed} {self.Time} {self.Decrease} {self.rect.x} {self.rect.y}")
 
@@ -172,17 +170,13 @@ class Personaje:
         if self.CheckAgain:    
             if self.OnGround: 
                 # print("Tocando piso 2")
-                self.gravity = 3
                 self.CheckAgain = False
                 self.Jumping = False
-                self.Jump_Speed = 3
+                self.Jump_Speed = 20
                 self.StopJumping = False
             else: 
                 # print("En el aire")
                 self.rect.y += self.gravity
-            
-    def ApplyGravity(self):
-        self.rect.y += self.gravity
         
     def ActualizarUltimasCoordenadas(self):
         self.LastX = self.rect.x
