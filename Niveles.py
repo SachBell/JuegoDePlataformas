@@ -3,8 +3,8 @@ from Objetos import *
 
 class Niveles():
 
-    def __init__(self) -> None:
-        pass
+    def __init__(self) -> None: 
+        self.Pincho5 = Objeto(410, 650, 50, 50, "trampa", "pincho", True)
 
     def Lvl_1(self):
         self.Pike = Objeto(800, 660, 40, 40, "trampa", "pincho", True)
@@ -22,17 +22,22 @@ class Niveles():
         self.Bloque1 = Objeto(200, 650, 50, 50, "muro", "piedra", True)
         self.Bloque2 = Objeto(250, 600, 50, 50, "muro", "piedra", True)
         self.Bloque3 = Objeto(300, 550, 50, 50, "muro", "piedra", True)
+
+        
         self.Bloque5 = Objeto(520, 550, 50, 50, "muro", "piedra", True)
         self.Bloque6 = Objeto(570, 600, 50, 50, "muro", "piedra", True)
         self.Bloque7 = Objeto(620, 650, 50, 50, "muro", "piedra", True)
-        self.Bloque7 = Objeto(670, 450, 50, 50, "muro", "piedra", True)
+        self.Bloque7 = Objeto(700, 450, 50, 50, "muro", "piedra", True)
         
 
-        self.Pincho1 = Objeto(250, 650, 50, 50, "trampa", "pincho", True)
-        self.Pincho2 = Objeto(300, 650, 50, 50, "trampa", "pincho", True)
-        self.Pincho3 = Objeto(520, 650, 50, 50, "trampa", "pincho", True)
-        self.Pincho4 = Objeto(570, 650, 50, 50, "trampa", "pincho", True)
+        # self.Pincho1 = Objeto(250, 650, 50, 50, "trampa", "pincho", True)
+        # self.Pincho2 = Objeto(300, 650, 50, 50, "trampa", "pincho", True)
+        # self.Pincho3 = Objeto(520, 650, 50, 50, "trampa", "pincho", True)
+        # self.Pincho4 = Objeto(570, 650, 50, 50, "trampa", "pincho", True)
         self.Pincho5 = Objeto(410, 650, 50, 50, "trampa", "pincho", True)
+
+    def EliminarInstancia(self):
+        Objeto.EliminarInstancia(self.Pincho5)      
 
 
         

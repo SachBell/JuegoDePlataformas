@@ -46,5 +46,11 @@ class Objeto():
     def TodosLosObjetos(cls):
         return cls.ObjetosCreados
     
+    @classmethod
+    def EliminarInstancia( cls, instancia):
+        if instancia in cls.ObjetosCreados:
+            cls.ObjetosCreados.remove(instancia)
+            del instancia
+    
 
     

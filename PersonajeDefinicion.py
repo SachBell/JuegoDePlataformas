@@ -127,7 +127,9 @@ class Personaje:
                         self.Ground = Objeto_Actual
                         self.HaveGround = True
                     elif (self.rect.top + 10) > Objeto_Actual.rect.bottom:
-                        self.rect.y = self.LastY+1
+                        print("debajo")
+                        self.rect.y = self.LastY+2
+                        self.CheckAgain = True
                         self.StopJumping = True
                     else:
                         self.rect.x = self.LastX

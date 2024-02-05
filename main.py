@@ -33,9 +33,12 @@ while Game:
     if Personaje_Principal.rect.y > Alto_Pantalla: EstadoActual.Muerte(Personaje_Principal)        
     
     Si = Tiempo.MostrarTiempo()
-    if Si == 30: EstadoActual.Muerte(Personaje_Principal)
-
-
+    if Si == 5: 
+        try:
+            nivel.EliminarInstancia(); print("s")
+        except:
+            print("eliminado")
+ 
  #Crear botón "Salir" centrado en la parte inferior de la ventana secundaria
         #boton_salir_nueva = pygame.Rect((Ancho_Pantalla - 300) // 2, Alto_Pantalla - 150, 300, 100)
         #pygame.draw.rect(ventana_nueva, blanco, boton_salir_nueva)
