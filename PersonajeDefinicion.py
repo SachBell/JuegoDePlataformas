@@ -110,16 +110,18 @@ class Personaje:
                     if (self.rect.bottom - 10) < Objeto_Actual.rect.top : 
                         self.rect.y = (Objeto_Actual.rect.top - self.rect.height)+1
                         self.IfOnGround()
-                    elif Objeto_Actual.GetTipo() == "trampa":
-                        print("auch")
-                        Estados.Muerte()
+                    
                     else:
                         self.rect.x = self.LastX
                         self.rect.y = self.LastY
                         self.HasCollided(True)
-                    
+                        print("colision")
+                elif Objeto_Actual.GetTipo() == "trampa":
+                        print("auch")
+                        Estados.Muerte(self)    
                                         
             else:
+                print("No colision")
                 self.HasCollided(False)
 
     def HasCollided(self, check):
@@ -131,17 +133,17 @@ class Personaje:
         if (self.IfCollide == False and self.IfCollide2 == False):
             self.CheckAgain = True
             self.OnGround = False
-            print(self.IfCollide)
-            print(self.IfCollide2)
+            # print(self.IfCollide)
+            # print(self.IfCollide2)
             print("condicion cumplida")
 
     def IfOnGround(self):
         self.OnGround = True
-        print("Tocando el piso")
+        # print("Tocando el piso")
     
     def IfNotOnGround(self):
         self.OnGround = False
-        print("No tocando el piso")
+        # print("No tocando el piso")
 
     def CheckGravity(self):
         if self.CheckAgain:    

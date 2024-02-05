@@ -11,7 +11,7 @@ pygame.init()
 pygame.display.set_mode()
 pygame.display.set_caption("Stickman Jumping")
 EstadoActual = States()
-Suelo = Objeto(0, 700, 1500, 200, "muro", "grass", False)
+Suelo = Objeto(0, 700, 1500, 240, "muro", "grass", False)
 Meta = Objeto(1000, 500, 100, 100, "", "arbol1", True)
 Pike = Objeto(800, 600, 40, 40, "trampa", "pincho", True)
 
