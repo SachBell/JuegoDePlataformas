@@ -2,6 +2,10 @@ import pygame
 from Importaciones import *
 from Objetos import Objeto
 from Configuración import *
+from Estados import *
+
+
+Estados = States()
 
 class Personaje:
     def __init__(self, x, y):
@@ -33,7 +37,7 @@ class Personaje:
         self.CheckAgain = True
         self.IfCollide = False
         self.IfCollide2 = False
-        self.Jump_Speed = 10
+        self.Jump_Speed = 28
         self.gravity = 3
         self.OnGround = False
         self.IdleWait = 0
@@ -59,16 +63,22 @@ class Personaje:
             self.rect.y += self.speed/2
 
         # Lógica de salto
-        if keys[pygame.K_SPACE] and not self.Jumping:
-            self.Jump_Speed = 10
+        if keys[pygame.K_SPACE] and self.OnGround and not self.Jumping:
+            self.Time = 5
+            self.Decrease = 7
             self.Jumping = True
         if self.Jumping:
-            if self.Jump_Speed >= 0:
+            if self.Jump_Speed > 0:
                 for i in range(0,self.JumpSpeed):
                     self.rect.y -= 1
-                self.Jump_Speed -=1
-                print("jump")
-            else: self.Jumping = False              
+                if Tiempo.FrameLimiter(self.Time):
+                    self.Jump_Speed -= self.Decrease
+                    self.Time += 1
+                    self.Decrease -= 1
+                print(f"{self.Jump_Speed} {self.Time} {self.Decrease}") 
+            else: 
+                self.Jumping = False
+                self.Jump_Speed = 28
 
     def CheckIdle(self):
         if self.IdleWait == 0:
@@ -99,15 +109,18 @@ class Personaje:
 
                     if (self.rect.bottom - 10) < Objeto_Actual.rect.top : 
                         self.rect.y = (Objeto_Actual.rect.top - self.rect.height)+1
-                        self.OnGround = True
+                        self.IfOnGround()
+                    elif Objeto_Actual.GetTipo() == "trampa":
+                        print("auch")
+                        Estados.Muerte()
                     else:
                         self.rect.x = self.LastX
                         self.rect.y = self.LastY
-                        
                         self.HasCollided(True)
+                    
+                                        
             else:
                 self.HasCollided(False)
-                self.OnGround = False
 
     def HasCollided(self, check):
         if self.i == 0:
@@ -115,24 +128,31 @@ class Personaje:
         elif self.i == 1:
             self.IfCollide2 = check; self.i = 0
         
-        if self.IfCollide != self.IfCollide2 or not self.IfCollide and not self.IfCollide2:
+        if (self.IfCollide == False and self.IfCollide2 == False):
             self.CheckAgain = True
-            self.OnGround = True
+            self.OnGround = False
+            print(self.IfCollide)
+            print(self.IfCollide2)
+            print("condicion cumplida")
 
-    def IfOnGround(self, OnGround):
-        if OnGround: self.OnGround = True
-
+    def IfOnGround(self):
+        self.OnGround = True
+        print("Tocando el piso")
+    
+    def IfNotOnGround(self):
+        self.OnGround = False
+        print("No tocando el piso")
 
     def CheckGravity(self):
         if self.CheckAgain:    
             if self.OnGround: 
-                # print("tocando piso")
+                # print("tocando piso\r")
                 self.gravity = 3
                 self.CheckAgain = False
+                self.Jumping = False
             else: 
-                # print("En el aire")
+                print("En el aire")
                 self.rect.y += self.gravity
-            
             
     def ApplyGravity(self):
         self.rect.y += self.gravity

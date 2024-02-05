@@ -12,9 +12,10 @@ pygame.display.set_mode()
 pygame.display.set_caption("Stickman Jumping")
 EstadoActual = States()
 Suelo = Objeto(0, 700, 1500, 200, "muro", "grass", False)
-Meta = Objeto(1000, 500, 100, 100, "muro", "arbol1", True)
+Meta = Objeto(1000, 500, 100, 100, "", "arbol1", True)
+Pike = Objeto(800, 600, 40, 40, "trampa", "pincho", True)
 
-Personaje_Principal = Personaje(600, 0)
+Personaje_Principal = Personaje(600, 500)
 Game = True
 
 # Llamar a la pantalla de carga antes de entrar al bucle principal

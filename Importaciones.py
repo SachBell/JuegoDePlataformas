@@ -31,7 +31,9 @@ Texturas = {"grass" : os.path.join('Data', 'Texturas', 'Tiles', 'Grass.png'),
             "barril": os.path.join('Data', 'Sprites', 'Objetos', 'barril.png'),
             "calabera": os.path.join('Data', 'Sprites', 'Objetos', 'calavera.png'),
             "palmeras": os.path.join('Data', 'Sprites', 'Objetos', 'palmeras.png'),
-            "Final": os.path.join('Data', 'Sprites', 'Objetos', 'Porton_Final.png')
+            "Final": os.path.join('Data', 'Sprites', 'Objetos', 'Porton_Final.png'),
+            "pincho": os.path.join('Data', 'Sprites', 'Objetos', 'pincho.png'),
+            "DTrap": os.path.join('Data', 'Sprites', 'Objetos', 'DeathTrap.png'),
             }
 
 # imagenchiquita = pygame.transform.scale(Character, (60, 100))
