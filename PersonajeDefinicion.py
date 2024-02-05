@@ -38,7 +38,7 @@ class Personaje:
         self.IfCollide = False
         self.IfCollide2 = False
         self.HaveGround = False
-        self.Jump_Speed = 20
+        self.Jump_Speed = 10
         self.gravity = 4
         self.OnGround = False
         self.IdleWait = 0
@@ -83,7 +83,7 @@ class Personaje:
                             self.Jump_Speed -= self.Decrease
                             
                             if Timer2.FrameLimiter(3):
-                                self.Time += 2
+                                self.Time += 1
                                 if self.Decrease == 1: pass    
                                 else: self.Decrease -= 1 
                     else:
@@ -172,7 +172,7 @@ class Personaje:
                 # print("Tocando piso 2")
                 self.CheckAgain = False
                 self.Jumping = False
-                self.Jump_Speed = 20
+                self.Jump_Speed = 15
                 self.StopJumping = False
             else: 
                 # print("En el aire")
