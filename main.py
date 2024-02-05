@@ -11,9 +11,11 @@ pygame.init()
 pygame.display.set_mode()
 pygame.display.set_caption("Stickman Jumping")
 EstadoActual = States()
-Suelo = Objeto(0, 700, 1500, 200, "muro", "grass")
-box = Objeto(600, 200, 50, 50, "muro", "grass")
-Personaje_Principal = Personaje(0, 700-384)
+Suelo = Objeto(0, 700, 1500, 200, "muro", "grass", False)
+box = Objeto(600, 200, 50, 50, "muro", "grass", True)
+box2 = Objeto(550, 250, 50, 50, "muro", "grass", True)
+
+Personaje_Principal = Personaje(600, 0)
 Game = True
 
 # Llamar a la pantalla de carga antes de entrar al bucle principal
@@ -28,16 +30,14 @@ while Game:
     keys = pygame.key.get_pressed()
     Personaje_Principal.move(keys, Ancho_Pantalla, Alto_Pantalla)
     Personaje_Principal.AccionPersonaje()
-    screen.fill(blanco)
     Objeto.DibujarObjetos(screen)
-    screen.blit(Personaje_Principal.image, Personaje_Principal.rect)
     pygame.display.flip()
     reloj.tick(60)
 
     if Personaje_Principal.rect.y > Alto_Pantalla: EstadoActual.Muerte(Personaje_Principal)        
     
     Si = Tiempo.MostrarTiempo()
-    if Si == 20: EstadoActual.Muerte(Personaje_Principal)
+    if Si == 30: EstadoActual.Muerte(Personaje_Principal)
 
 
  #Crear botón "Salir" centrado en la parte inferior de la ventana secundaria

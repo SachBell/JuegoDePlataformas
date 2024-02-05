@@ -19,7 +19,7 @@ class Personaje:
         self.Current_Sprites = self.Sprites_Idle
         self.Sprite_Index = 0
         self.image = self.Current_Sprites[self.Sprite_Index]
-        self.rect = pygame.Rect(40, 40, 165, 384)
+        self.rect = pygame.Rect(0, 0, 60, 140)
         self.InitialX = x
         self.InitialY = y
         self.LastX = self.InitialX
@@ -30,7 +30,7 @@ class Personaje:
         self.Jumping = False
         self.jump_count = 10
         self.gravity = 3
-        self.OnGround = True
+        self.OnGround = False
         self.IdleWait = 0
         self.framecount = 0
 
@@ -43,6 +43,7 @@ class Personaje:
             self.IdleWait = 3
             self.ChangeSprites("right")
             self.rect.x += self.speed
+
         if keys[pygame.K_UP]:
             self.rect.y -= self.speed/2
         if keys[pygame.K_DOWN]:
@@ -88,23 +89,32 @@ class Personaje:
             if self.rect.colliderect(Objeto_Actual.rect):
                 if Objeto_Actual.GetTipo() == "muro":
 
-                    if (self.rect.bottom - 10) < Objeto_Actual.rect.top : print(f"{self.rect.bottom} - {Objeto_Actual.rect.top} encima de")
-
-                    self.rect.x = self.LastX
-                    self.rect.y = self.LastY
-                    print("contacto")
-
+                    if (self.rect.bottom - 10) < Objeto_Actual.rect.top : 
+                        self.rect.y = self.LastY
+                        self.OnGround = True
+                    else:
+                        self.rect.x = self.LastX
+                        self.rect.y = self.LastY
+                        self.OnGround = False
             else:
                 self.OnGround = False
+        
+    def CheckGravity(self):
+        if self.OnGround: print("tocando piso")
+        else: print("En el aire"); self.rect.y += self.gravity
+    
+    def ActualizarUltimasCoordenadas(self):
         self.LastX = self.rect.x
         self.LastY = self.rect.y
-    
-    def CheckGravity(self):
-        pass
 
     def AccionPersonaje(self):
         self.CheckIdle()
         self.CheckCollide()
+        self.CheckGravity()
+        self.ActualizarUltimasCoordenadas()
+
+        Resize_Character = pygame.transform.scale(self.image, (self.rect.width, self.rect.height))
+        screen.blit(Resize_Character, self.rect)
 
     def GetX(self): return self.rect.x
     def GetY(self): return self.rect.y
