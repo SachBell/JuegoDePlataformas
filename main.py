@@ -9,13 +9,13 @@ from Menu import *
 from Niveles import *
 
 pygame.init()
-pygame.display.set_mode(Resolucion, pygame.SRCALPHA)
+pygame.display.set_mode(Resolucion, pygame.SRCALPHAResolucion, pygame.SRCALPHA)
 pygame.display.set_caption("Stickman Jumping")
 EstadoActual = States()
 nivel = Niveles()
 nivel.Lvl_3()
 
-Personaje_Principal = Personaje(1, 450)
+Personaje_Principal = Personaje(1, 500)
 Game = True
 
 # Llamar a la pantalla de carga antes de entrar al bucle principal
@@ -26,18 +26,13 @@ while Game:
     Tiempo.ComenzarTiempo()
     EstadoActual.CheckInput(Personaje_Principal)
     Objeto.DibujarObjetos()
+    Objeto.DibujarObjetos()
     Personaje_Principal.AccionPersonaje()
     pygame.display.flip()
     reloj.tick(60)
 
     if Personaje_Principal.rect.y > Alto_Pantalla: EstadoActual.Muerte(Personaje_Principal)        
     
-    Si = Tiempo.MostrarTiempo()
-    if Si == 5: 
-        try:
-            nivel.EliminarInstancia(); print("s")
-        except:
-            print("eliminado")
  
  #Crear botón "Salir" centrado en la parte inferior de la ventana secundaria
         #boton_salir_nueva = pygame.Rect((Ancho_Pantalla - 300) // 2, Alto_Pantalla - 150, 300, 100)
