@@ -22,6 +22,8 @@ class Niveles():
         # self.Tree2 = Objeto(1000, 500, 240, 240, "", "arbol1", True)
 
         self.Plataform1 = Objeto(500, 600, 40, 40, "muro", "grass", True)
+        self.Tree2 = Objeto(1000, 500, 240, 240, "", "arbol1", True)
+        self.Arbusto1 = Objeto(800, 660, 45, 45, "", "arbusto", True)
         self.Plataform2 = Objeto(950, 550, 50, 40, "muro", "piedra", True)
         self.Plataform3 = Objeto(850, 400, 50, 40, "muro", "piedra", True)
         self.Plataform4 = Objeto(750, 350, 50, 40, "muro", "piedra", True)
@@ -34,6 +36,46 @@ class Niveles():
 
     def Lvl_2(self):
         self.Suelo = Objeto(0, 700, 1500, 240, "muro", "grass", False)
+
+    def Lvl_2(self):
+        self.Tree1 = Objeto(100, 500, 240, 240, "", "arbol2", True)
+        self.Tree3 = Objeto(500, 500, 240, 240, "", "arbol2", True)
+        self.Tree5 = Objeto(900, 500, 240, 240, "", "arbol1", True)
+        self.Arbusto1 = Objeto(20, 660, 45, 45, "", "arbusto", True)
+        self.Arbusto2 = Objeto(50, 660, 45, 45, "", "arbusto", True)
+        self.Arbusto3 = Objeto(250, 660, 180, 45, "", "arbusto", True)
+        self.Arbusto4 = Objeto(350, 660, 45, 45, "", "arbusto", True)
+        self.Arbusto5 = Objeto(500, 660, 180, 45, "", "arbusto", True)
+        self.Arbusto6 = Objeto(800, 660, 45, 45, "", "arbusto", True)
+        self.Arbusto7 = Objeto(900, 660, 180, 45, "", "arbusto", True)
+
+        self.Bloque1 = Objeto(200, 600, 50, 100, "muro", "piedra", True)
+        self.Bloque2 = Objeto(290, 450, 100, 50, "muro", "piedra", True)
+        self.Bloque3 = Objeto(500, 380, 20, 20, "muro", "piedra", True)
+        self.Bloque4 = Objeto(700, 380, 10, 10, "muro", "piedra", True)
+        self.Bloque5 = Objeto(900, 450, 100, 50, "muro", "piedra", True)
+        self.Bloque6 = Objeto(900, 300, 50, 200, "muro", "piedra", True)
+
+        self.Pincho = Objeto(350, 650, 50, 50, "", "pincho", True)
+        self.Pincho = Objeto(400, 650, 50, 50, "", "pincho", True)
+        self.Pincho = Objeto(450, 650, 50, 50, "trampa", "pincho", True)
+        self.Pincho = Objeto(500, 650, 50, 50, "", "pincho", True)
+        self.Pincho = Objeto(550, 650, 50, 50, "", "pincho", True)
+        self.Pincho = Objeto(600, 650, 50, 50, "", "pincho", True)
+        self.Pincho = Objeto(650, 650, 50, 50, "", "pincho", True)
+        self.Pincho = Objeto(700, 650, 50, 50, "trampa", "pincho", True)
+        self.Pincho = Objeto(750, 650, 50, 50, "", "pincho", True)
+        self.Pincho = Objeto(800, 650, 50, 50, "", "pincho", True)
+        self.Pincho = Objeto(850, 650, 50, 50, "", "pincho", True)
+        self.Pincho = Objeto(900, 650, 50, 50, "", "pincho", True)
+        self.Pincho = Objeto(950, 650, 50, 50, "", "pincho", True)
+        self.Pincho = Objeto(1000, 650, 50, 50, "", "pincho", True)
+        self.Pincho = Objeto(1050, 650, 50, 50, "", "pincho", True)
+
+        self.End = Objeto(1140, 560, 150, 150, "Porton_Final", "Final", True)
+
+        self.Suelo = Objeto(0, 700, 1500, 240, "muro", "grass", False)
+
         self.Bloque1=Objeto(300,500,50,150, "muro","piedra",True)
         self.Bloque3=Objeto(0,550,50,50, "muro","piedra",True)
         self.Bloque4=Objeto(160,500,50,50, "muro","piedra",True)
