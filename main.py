@@ -14,7 +14,7 @@ pygame.display.set_caption("Stickman Jumping")
 EstadoActual = States()
 nivel = Niveles()
 Pantalla = Menus()
-nivel.Lvl_2()
+nivel.Lvl_3()
 
 Personaje_Principal = Personaje(1, 500)
 Game = True
@@ -22,7 +22,7 @@ Menu = True
 Playing = False
 
 # Llamar a la pantalla de carga antes de entrar al bucle principal
-Pantalla.pantalla_carga()
+# Pantalla.pantalla_carga()
 # Loop principal
 while Game:
         
