@@ -77,6 +77,7 @@ class Personaje:
             self.Decrease = 1
             self.Jumping = True
             self.count = 20
+
         elif self.Jumping and not self.StopJumping:
               
                     if self.count > 0 and self.Decrease > 0 and self.Jump_Speed > 0:
@@ -88,7 +89,7 @@ class Personaje:
                         if self.Time >= 3:
                             self.Decrease += 4; self.Time = 0
 
-                        print(f"jumping {self.count} {self.Decrease} {(self.Jump_Speed - self.Decrease)}")
+                        # print(f"jumping {self.count} {self.Decrease} {(self.Jump_Speed - self.Decrease)}")
                     else:
                         self.StopJumping = True 
                         
@@ -127,7 +128,7 @@ class Personaje:
                         self.Ground = Objeto_Actual
                         self.HaveGround = True
                     elif (self.rect.top + 10) > Objeto_Actual.rect.bottom:
-                        print("debajo")
+                        # print("debajo")
                         self.rect.y = self.LastY+2
                         self.CheckAgain = True
                         self.StopJumping = True
@@ -136,7 +137,9 @@ class Personaje:
                         
                 elif Objeto_Actual.GetTipo() == "trampa":
 
-                        Estados.Muerte(self)                 
+                        Estados.Muerte(self)
+                elif Objeto_Actual.GetTipo() == "meta":
+                    print("ganaste")                 
             else:
                 # print("No colision")
                 pass
@@ -176,7 +179,7 @@ class Personaje:
     def CheckGravity(self):
         if self.CheckAgain:    
             if self.OnGround: 
-                print("Tocando piso 2")
+                # print("Tocando piso 2")
                 self.AddedGravity = 0
                 self.gravity = 10
                 self.CheckAgain = False
@@ -189,7 +192,7 @@ class Personaje:
                 self.AplicarGravedad(self.gravity)
     
     def AplicarGravedad(self, Gravedad):
-        print(self.AddedGravity)
+        # print(self.AddedGravity)
         for i in range(0, Gravedad):
             self.rect.y += 1
             self.CheckCollide()
@@ -198,8 +201,6 @@ class Personaje:
                
         self.AddedGravity += 1
             
-        
-        
     def ActualizarUltimasCoordenadas(self):
         self.LastX = self.rect.x
         self.LastY = self.rect.y

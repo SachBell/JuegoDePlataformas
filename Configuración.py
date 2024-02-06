@@ -50,6 +50,10 @@ class TimeControl:
     
     def ModificarSegundos(self, seg):
         self.segundos = seg
+    
+    def getFPS(self):
+        FPS = Tiempo.getFPS
+        print(FPS)
         
 
 #Objeto para control del tiempo
